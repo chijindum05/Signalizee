@@ -8,7 +8,8 @@ import Index from "./pages/Index";
 import About from "./pages/About";
 import Applications from "./pages/Applications";
 import NotFound from "./pages/NotFound";
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
+
 
 const queryClient = new QueryClient();
 
@@ -31,7 +32,18 @@ const App = () => (
     </ThemeProvider>
   </QueryClientProvider>
 );
+function ApiTest() {
+  const [message, setMessage] = useState("");
 
+  useEffect(() => {
+    fetch("http://localhost:5000/api/test")
+      .then((res) => res.json())
+      .then((data) => setMessage(data.message))
+      .catch((err) => console.error(err));
+  }, []);
+
+  return <div>API says: {message}</div>;
+}
 
 
 
